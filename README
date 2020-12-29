@@ -1,0 +1,27 @@
+MEAMfit
+-------
+
+Contents of folder:
+-------------------
+
+    src/
+           Contains the source files and the installmeam script needed to install MEAMfit. The installmeam 
+           script can be run by typing 'csh installmeam'. For instructions on changing the Fortran compiler 
+           (e.g. to gfortran) please consult the User Manual.
+
+    SampleCalculation/
+           Contains the sample test run to be run by the code librarian. Two directories are included: 
+           Input/ and Output/, containing the input files and sample output files respectively.
+       >>> For detailed instructions on performing the test run, please see Section 5 of the User Manual. <<<
+
+    MEAMfitUserGuide.pdf
+           Contains the MEAMfit User Manual. Please refer to this for details on operation, as well as
+           detailed instructions on performing the test run.
+
+Version information:
+--------------------
+
+version | changes
+
+1.01      - Bug fix: MEAMfit crashes when fitdbse file contains vasprun.xml files with different numbers/types of atoms
+          - Increased maximum number of allowed vasprun.xml files to 10000

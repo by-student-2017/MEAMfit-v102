@@ -1,0 +1,142 @@
+#!/bin/csh
+##############################################################
+# use 'csh installmeam' to install meam version January 2015
+# platform independent installation utility (generates Makefile)
+# overwrites 'Makefile' if it exists!
+# Marcel Sluiter, January 2015
+##############################################################
+ 
+#   modules
+##############################################################
+set MODULES = '\
+m_atomproperties.f90 m_datapoints.f90 \
+m_electrondensity.f90 m_filenames.f90 m_general_info.f90 \
+m_geometry.f90 m_meamparameters.f90 m_neighborlist.f90 \
+m_optimization.f90 m_plotfiles.f90 m_poscar.f90 m_screening.f90 '
+ 
+#   generic source code
+##############################################################
+set SUBS = '\
+source.f90 '
+ 
+#   platform specific source code
+##############################################################
+ 
+# other important files
+##############################################################
+set OTHERFILES = '\
+settings fitdbse vasprun.xml installmeam '
+
+# platform dependent switches...
+##############################################################
+switch ( `uname -s` )
+ 
+case Darwin:
+  #for Mac (library independent, self-contained)
+  set FC = 'gfortran'
+  set FFLAGS = '-mtune=native -O3 -fimplicit-none -fdefault-integer-8'
+  set FLIB   = ' '
+  set LNKFLG = '-static '
+  breaksw
+
+case Linux:
+  #linux using intel compiler
+  set FC = 'gfortran'
+  set FFLAGS = '-mtune=native -O3 -fimplicit-none -fdefault-integer-8'
+  set FLIB   = ' '
+  set LNKFLG = '-static '
+  breaksw
+ 
+#case Linux:
+#  #linux using intel compiler
+#  set FC='ifort'
+#  set FFLAGS = '-g -assume byterecl -fltconsistency -fpconstant -real-size 64 -O3'
+#  set FLIB   = ' '
+#  set LNKFLG = ' '
+#  breaksw
+ 
+case CYGWIN_NT-5.1:
+  #cygwin 32bit
+  set FC = 'gfortran'
+  set FFLAGS = '-mtune=native -m32 -O3 -fimplicit-none -fdefault-integer-8'
+  set FLIB   = ' '
+  set LNKFLG = '-static -m32 '
+  breaksw
+ 
+case CYGWIN_NT-6.1:
+  #cygwin
+  set FC = 'gfortran'
+  set FFLAGS = '-O3'
+  set FLIB   = ' '
+  set LNKFLG = ' '
+  breaksw
+endsw
+ 
+echo compiler: $FC
+echo source: $MODULES $SUBS
+echo compilation flags: $FFLAGS $LNKFLG
+echo libraries: $FLIB
+#make a Makefile
+rm -f Makefile
+echo '#######################################################' > Makefile
+echo '# Makefile for MEAM' >> Makefile
+echo '#######################################################' >> Makefile
+echo '# compilation' >> Makefile
+echo '#######################################################' >> Makefile
+echo 'FC      = ' $FC >> Makefile
+echo 'FFLAGS  = ' $FFLAGS >> Makefile
+echo 'FLIB    = ' $FLIB >> Makefile
+echo 'LNKFLG  = ' $LNKFLG >> Makefile
+echo '#######################################################' >> Makefile
+echo 'MODULES = ' $MODULES >> Makefile
+echo '#######################################################' >> Makefile
+echo 'SUBS    = ' $SUBS >> Makefile
+echo '#######################################################' >> Makefile
+echo 'OTHERFILES      = ' $OTHERFILES >> Makefile
+echo '# make rules' >> Makefile
+echo '#######################################################' >> Makefile
+echo '.f.o:' >> Makefile
+echo '	$(FC) $(FFLAGS) -c $<' >> Makefile
+echo ' OBJ = ${SUBS:.f=.o}' >> Makefile
+echo ' OBJM= ${MODULES:.f=.o}' >> Makefile
+echo ' MODM= ${MODULES:.f=.mod}' >> Makefile
+echo '#   dependencies of object-files  (January 25, 2015)' >> Makefile
+echo '##platform dependent##########################################' >> Makefile
+echo '##platform independent########################################' >> Makefile
+echo 'source.o:    m_atomproperties.f90 m_datapoints.f90 m_electrondensity.f90 m_filenames.f90 m_general_info.f90 m_geometry.f90 m_meamparameters.f90 m_neighborlist.f90 m_optimization.f90 m_plotfiles.f90 m_poscar.f90 m_screening.f90' >> Makefile
+echo '#   make NEW MEAM program for code development' >> Makefile
+echo '#######################################################' >> Makefile
+echo 'MEAMfit:  $(OBJM) $(OBJ)' >> Makefile
+echo '	$(FC) $(OBJM) $(OBJ) $(FFLAGS) $(FLIB) $(LNKFLG) -o $@' >> Makefile
+echo '	chmod ugo+r *' >> Makefile
+echo '	chmod ugo+x MEAMfit' >> Makefile
+echo '#   make NEW MEAM program (named: MEAMfit)' >> Makefile
+echo '#######################################################' >> Makefile
+echo '#MEAMfit:' >> Makefile
+echo '# rm -f all.f' >> Makefile
+echo '# cat $(MODULES) $(SUBS) > all.f' >> Makefile
+echo '# $(FC) $(FFLAGS) $(FLIB) all.f -o $@' >> Makefile
+echo '# chmod ugo+r *' >> Makefile
+echo '# chmod ugo+x MEAMfit' >> Makefile
+echo '#   make concatenated MEAM (named: all.f)' >> Makefile
+echo '#######################################################' >> Makefile
+echo 'all:' >> Makefile
+echo '	rm -f all.f' >> Makefile
+echo '	cat $(MODULES) $(SUBS) > all.f' >> Makefile
+echo '#   make tar file (named: meam.tar)' >> Makefile
+echo '#######################################################' >> Makefile
+echo 'tar:' >> Makefile
+echo '	rm -f meam.tar' >> Makefile
+echo '	tar -cvf meam.tar $(MODULES) $(SUBS) $(OTHERFILES)' >> Makefile
+echo '#######################################################' >> Makefile
+echo 'uue:' >> Makefile
+echo '	rm -f meam.tar meam.tar.Z meam.uue' >> Makefile
+echo '	tar -cvf meam.tar $(MODULES) $(SUBS) $(OTHERFILES)' >> Makefile
+echo '	gzip meam.tar' >> Makefile
+echo '	uuencode meam.tar.gz meam.tar.gz > meam.uue ' >> Makefile
+echo '#######################################################' >> Makefile
+echo 'clean:' >> Makefile
+echo '	rm -f *.mod *.o *.omp.f *.lst *.log *.L MEAMfit' >> Makefile
+echo '################### end of Makefile ###################' >> Makefile
+make MEAMfit
+

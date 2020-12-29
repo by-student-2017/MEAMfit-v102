@@ -1,0 +1,13 @@
+ # structure-id | smallest sepn
+   1    1.90657    2.80448    1.90657    2.79122
+ smallest sepns across all files:
+           1           1 :   2.80448121829430     
+           1           2 :   1.90657445872233     
+           2           2 :   2.79121859964189     
+ overall :   1.90657445872233     
+ 
+ largest sepns across all files:
+           1           1 :   4.37860349683032     
+           1           2 :   4.39760483805961     
+           2           2 :   4.32825822740540     
+ overall :   4.39760483805961     

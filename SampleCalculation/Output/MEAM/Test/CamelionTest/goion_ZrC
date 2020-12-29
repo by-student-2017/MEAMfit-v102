@@ -1,0 +1,415 @@
+#!/bin/tcsh
+############################################################
+# goion_ZrC
+#             Launching script for Camelion SM 9.15
+#         Molecular Dynamics or Dynamic Monte Carlo
+# This script is for ZrC
+############################################################
+#
+# Edit this file first. Then, assuming that the initial configuration
+# file is called cnXX.YYYY, where YYYY is the initial reduced time
+# in units 1e-4, type:
+#
+#     goion_ZrC XX YYYY simulationtime(1e-4) cnsavetime(1e-4)
+#
+# For extensive information, consult the introductory part of camelion.f,
+# where the parameters specified here sometimes have slightly different
+# names.
+
+
+
+
+
+
+
+
+
+
+
+#=====================================================================
+# Editable area starts here
+#=====================================================================
+
+#
+# Variable declarations, not in any particular order
+set MAKEIMAGE=0         # 0=no, 1=yes
+set IMAGESPECS="nib nb"
+
+#
+
+#
+#---------------------------------------------------------------------
+# Code of this launching script, used as extension in naming of scratch files
+#---------------------------------------------------------------------
+set GOIONCODE=ZrC
+#
+#---------------------------------------------------------------------
+# Time intervals between lines in output files in units 1e-4
+# (Note: 1 time unit = 0.709 ps, 1e-4 units = 0.0709 fs)
+#---------------------------------------------------------------------
+set RTTIME4=100
+set OUTTIME4=250
+#
+#---------------------------------------------------------------------
+# Temperature control 
+# (Note: 1 temperature unit = 1012 K)
+#---------------------------------------------------------------------
+set ITCNTR=1		# 0=no, 1=yes, 2=yes even when non-Maxwellian
+#
+set TZERO=0.8
+set ITSENSE=1		# 0=total, 1=bound, 2=bottom, 3=bound non-bottom
+set ISCALE=1		# same
+set ITSNAP=1		# same
+set TSNAPFACTOR=1000.0  # value>>10=no snapping
+set TAUT=0.025
+#
+set EXCDRIFT=0          # exclude drift speed from T-control
+set EXCROT=0		# exclude rotational speeds from T-control
+#
+set TDELAY_TIME=0.0	# waiting time before temperature ramp
+set TRATE=0.0		# temperature ramp rate
+set TFINAL=0.0          # final temperature
+set TDELAY_TIME=0.0     # waiting time before temperature ramp
+set TRATE=0.0           # temperature ramp rate
+set TFINAL=0.0          # final temperature
+#
+set ITGRAD=0            # 0=no temperature gradient imposed (i.e. use TZERO or DMCTEMP), 1=yes
+set TGRADMODE=1         # 1=MD, 2=DMC, 3=hybrid (just as SIMMODE) --3 not yet available--
+set TGRADDIR=3          # 1=x, 2=y, 3=z
+set TGRADTEMP0=0.3      # temperature at begin of box (x=0 or y=0 or z=0)
+set TGRADTEMP1=2.3      # if TGRADDIR is a periodic direction: temperature at halfbox point
+                        # if TGRADDIR is a nonperiodic direction: temperature at end of box
+set TGRADVAR2=0.0       # fraction of halfbox (PER.) or box (NON-PER.) at which gradient starts
+set TGRADVAR3=1.0       # fraction of halfbox (PER.) or box (NON-PER.) at which gradient ends
+set TGRADVAR4=999.999   # for future use
+set TGRADVAR5=999.999   # for future use
+#
+#---------------------------------------------------------------------
+# Pressure control
+# (Note: 1 pressure unit = 7226 bar)
+#---------------------------------------------------------------------
+set IPCNTR=0		# 0=no, 1=yes
+#
+set PZERO=0.0
+set TAUP=5.0
+#
+set PDELAY_TIME=0.0	# waiting time before pressure ramp
+set PRATE=0.0		# pressure ramp rate
+set PFINAL=0.0          # final pressure
+#
+#---------------------------------------------------------------------
+# Calculate stress tensor?
+#---------------------------------------------------------------------
+set STRESSTENSOR=2	# 0=never, 1=at every save, 2=at first step
+#                       # only, 3=at last step only
+#
+set OMEGA_Zr=0.7359	# atomic volume (NOT CORRECT)
+set OMEGA_C=0.2         # not correct
+#
+#---------------------------------------------------------------------
+# Arrival of particles
+# (Note: 1 energy unit = 0.0872 eV. Angles in degrees)
+#---------------------------------------------------------------------
+set ISHOOT=0		# 0=no, 1=yes
+# Zr
+set TYPE1IN=0
+set TYPE1TIME=1.0
+set TYPE1ENERGY=2.0
+set TYPE1ENERGY2=2.0
+set TYPE1FRACTION=0.0
+set THETA1=15.0
+set PHI1=13.0
+set INTROMODE1=1	# 1=fixed phi, 2=random phi
+#
+#---------------------------------------------------------------------
+# Bottom atoms
+#---------------------------------------------------------------------
+set IANCH=0		# 0=no, 1=yes
+set IPATH=0           # 0=no, 1=atoms constrained in all directions, 2=in x, 
+                      # 3=in y, 4=in z, 5=in x and y, 6= in y and z, 7=in z and x
+                      # 100=atoms rather than anchor points move along the path
+set ITRANSF=0         # 0=no, 1=X,Y AND Z, 2=in x, 
+                      # 3=in y, 4=in z, 5=in x and y, 6= in y and z, 7=in z and x
+#
+#---------------------------------------------------------------------
+# Pulling path (additional file 'ppXX' required)
+#---------------------------------------------------------------------
+set IPATH=0             # 0=no, 1=atoms constrained in all directions, 2=in x, 
+                        # 3=in y, 4=in z, 5=in x and y, 6= in y and z, 7=in z and x
+# 100=atoms rather than anchor points move along the path
+
+#---------------------------------------------------------------------
+# Scaling (additional file 'scXX' required)
+#---------------------------------------------------------------------
+set ITRANSF=0           # 0=no, 1=X,Y AND Z, 2=in x, 
+                        # 3=in y, 4=in z, 5=in x and y, 6= in y and z, 7=in z and x
+
+#
+#---------------------------------------------------------------------
+# Atom IDs in outfile, if any. Examples: (0), (1 1354), (2 210 6540)
+#---------------------------------------------------------------------
+set OUT_ATOMS=(1 20)
+#
+#---------------------------------------------------------------------
+# Atom ID in inspecion file
+#---------------------------------------------------------------------
+set INSPECTION_ATOM=1
+#
+#---------------------------------------------------------------------
+# Simulation mode
+#---------------------------------------------------------------------
+set SIMMODE=1		# 1=MD, 2=DMC
+#
+#---------------------------------------------------------------------
+# Seed for random number generator
+#---------------------------------------------------------------------
+set ISEED=0		# 0=get from clock, other=use this as seed
+#
+#---------------------------------------------------------------------
+# MD parameters
+# (Note: 1 length unit = 2.684 A)
+#---------------------------------------------------------------------
+set STEPMODE=1		# 1=automatic, 2=fixed time
+set MAXADVANCE=0.0075	# maximum travel distance (when STEPMODE=1)
+                        # fixed time (when STEPMODE=2)
+set MAXTIMESTEP=0.0025	# maximum allowed timestep
+set AUTOSAVETIME4=0	# time interval between automatic cnfile saves
+set RESETTIME_RMS=2.0
+set RESETTIME_VACF=2.0
+set KINETIC_ENERGY_REMOVAL_MODE=0
+set RS=0.1		# skin thickness
+set UPDFAC=0.8		# parameter for neighbor list updating
+set TIMEMODE=1          # time measured in (1) 1e-4 or (2) steps
+set KTMZ=0              # keep total momentum zero (artificially)
+#
+#---------------------------------------------------------------------
+# DMC parameters
+#---------------------------------------------------------------------
+set DMCFRAC=0.5         # Fraction DMC in hybrid algorithm (SIMMODE=3)
+set DMCTEMP=0.7
+set DMCDIST1=0.1	# maximum allowed displacement for type=1
+set DMCDIST2=0.1	# maximum allowed displacement for type=2
+set DMCDIST3=0.1	# maximum allowed displacement for type=3
+#
+#---------------------------------------------------------------------
+# Atomic types
+# (Note: 1 mass unit = 1 amu (ONLY HERE) or 58.71 amu (EVERYWHERE ELSE))
+# (Note: 1 force-constant unit = 0.194 N/m)
+#---------------------------------------------------------------------
+set TYPES=2
+set Zr_MASS_FORCECONSTANT=(91.224 1169.0) # Force constants wrong
+set C_MASS_FORCECONSTANT=(12.0107 1169.0)
+#
+#---------------------------------------------------------------------
+# MEAM parameters
+#---------------------------------------------------------------------
+
+#  0.000000000000000E+000  0.000000000000000E+000  0.618782906424090
+#  0.505553473600771      -0.976125290821757       -3.91355950628833
+# -0.135930197581572       -1.68662741956188
+
+set TFIXED=1          # 1,0 = Fixed or environment-dependent t factors
+# Zr
+set Zr_EH3=0
+set Zr_TDF=1
+set Zr_TWH1=-0.10702123977816
+set Zr_TWH2=-2.11505426557552
+set Zr_TWH3=5.454244979684400
+# C
+set C_EH3=0
+set C_TDF=1
+set C_TWH1=1.2073213092895301
+set C_TWH2=0.1531189470916990
+set C_TWH3=-3.105480454126400
+#
+set USEANGSCREEN=F
+set ZrZrZr_CMIN=0.36
+set ZrZrZr_CMAX=2.8
+set ZrZrC_CMIN=0.16
+set ZrZrC_CMAX=2.8
+set ZrCZr_CMIN=0.36
+set ZrCZr_CMAX=2.8
+set ZrCC_CMIN=0.16
+set ZrCC_CMAX=2.8
+set CZrZr_CMIN=0.16
+set CZrZr_CMAX=2.8
+set CZrC_CMIN=0.16
+set CZrC_CMAX=1.44
+set CCZr_CMIN=0.16
+set CCZr_CMAX=2.8
+set CCC_CMIN=1.41
+set CCC_CMAX=2.8
+#---------------------------------------------------------------------
+# Pair potential and embedding files
+#---------------------------------------------------------------------
+set POTENTIALDIRECTORY=/work/aiduff/MEAMfit_forArticle/SampleCalculation/Output/MEAM/Test/CamelionTest
+set POTENTIALCODE=ZrC_MEAM
+set PVFILE=$POTENTIALDIRECTORY/$POTENTIALCODE.pv
+set EAMMODE=2   # 0=pair potential only, 1,11 =EAM, 2,12=MEAM
+                # (11 and 12: "Extended", double-type electr. dens.)
+set Zr_NDEF=4
+set C_NDEF=4
+set EDV0FILE=$POTENTIALDIRECTORY/${POTENTIALCODE}0.edv
+set EDV1FILE=$POTENTIALDIRECTORY/${POTENTIALCODE}1.edv
+set EDV2FILE=$POTENTIALDIRECTORY/${POTENTIALCODE}2.edv
+set EDV3FILE=$POTENTIALDIRECTORY/${POTENTIALCODE}3.edv
+set EBFILE=$POTENTIALDIRECTORY/$POTENTIALCODE.eb
+set ZrZr_PV=(10000  1.63934426229508  0.268744961031981E-03 0.0 0.0 0.0)
+set ZrC_PV=(10000  1.63934426229508  0.268744961031981E-03 0.0 0.0 0.0)
+set CC_PV=(10000  1.63934426229508  0.268744961031981E-03 0.0 0.0 0.0)
+set Zr_EDV=(T 10000  1.63934426229508  0.268744961031981E-03 0.0)
+set C_EDV=(T 10000  1.63934426229508  0.268744961031981E-03 0.0)
+set Zr_EB=(14000   9671.1798839458  0.69084790941823 -0.69084790941823)
+set C_EB=(14000   9671.1798839458  0.69084790941823 -0.69084790941823)
+#
+#---------------------------------------------------------------------
+# Program location
+#---------------------------------------------------------------------
+set PROGRAM=/home/aiduff/MEAM/bin/camelion/camelion11.53-intel-ifort11
+#
+#=====================================================================
+# Edit below this line only in exceptional cases
+#=====================================================================
+# Command line parameters
+set RUNNR = `echo $1 | sed 's/[@#t]/0000/'`
+set STARTTIME4 = `echo $2 | sed 's/[@#t]/0000/'`
+set SIMTIME4 = `echo $3 | sed 's/[@#t]/0000/'`
+set CNSAVETIME4 = `echo $4 | sed 's/[@#t]/0000/'`
+#
+# Input/output files ("scratch"), letter-dependent names:
+set CNFILE=cn$RUNNR$GOIONCODE
+#
+# Input files
+set BTFILE=bt$RUNNR
+set PPFILE=pp$RUNNR
+set TRANSFFILE=sc$RUNNR
+
+#
+# Output files ("permanent")
+set RUNGOFILE=rungo$RUNNR.$STARTTIME4
+#
+# Output files ("scratch"), letter-dependent names
+set RTFILE=rt$RUNNR$GOIONCODE
+set VRFILE=out$RUNNR$GOIONCODE
+set INSFILE=ins$RUNNR$GOIONCODE
+set REMFILE=rem$RUNNR$GOIONCODE
+set PFFILE=pf$RUNNR$GOIONCODE
+#
+# Checking bottom atoms file
+if (($IANCH == "1") || ($IPATH > 0 && $IPATH < 100)) then
+  if !(-e $BTFILE) then
+    echo "Bottom atoms file $BTFILE not found. Exiting..."
+    exit 1
+    endif
+  endif
+# Checking pulling path file
+if ($IPATH > 0) then
+  if !(-e $PPFILE) then
+    echo "Pulling path file $PPFILE not found. Exiting..."
+    exit 1
+    endif
+  endif
+# Checking scale file
+if ($ITRANSF > 0) then
+  if !(-e $TRANSFFILE) then
+    echo "Transform file $TRANSFFILE not found. Exiting..."
+    exit 1
+  endif
+endif
+#
+echo Ensuring write permissions
+chmod 644 $CNFILE $RTFILE $VRFILE $RUNGOFILE $INSFILE $REMFILE $PFFILE
+chmod 644 energyloss inspection cn.err 
+#
+echo Copying this launching script $0 to $RUNGOFILE
+cp $0 $RUNGOFILE
+#
+echo Copying cn$RUNNR.$STARTTIME4 to $CNFILE
+cp cn$RUNNR.$STARTTIME4 $CNFILE
+#
+# Now we call camelion
+#
+time $PROGRAM <<=
+Testrun
+$SIMMODE
+$TIMEMODE $SIMTIME4
+$STEPMODE $MAXADVANCE $MAXTIMESTEP
+$AUTOSAVETIME4
+$CNSAVETIME4
+$RUNNR
+$STARTTIME4
+$RTFILE
+$RTTIME4 $OUTTIME4
+$CNFILE
+$TYPES
+$RESETTIME_RMS $RESETTIME_VACF
+$INSFILE
+$REMFILE
+$BTFILE
+$IANCH $ITCNTR $IPCNTR
+$ITSENSE $ISCALE $ITSNAP $TSNAPFACTOR
+$Zr_MASS_FORCECONSTANT
+$C_MASS_FORCECONSTANT
+$PVFILE
+$ZrZr_PV
+$ZrC_PV
+$CC_PV
+$EAMMODE
+$EDV0FILE 
+$EDV1FILE 
+$EDV2FILE 
+$EDV3FILE
+$Zr_EDV
+$C_EDV
+$Zr_TWH1 $Zr_TWH2 $Zr_TWH3 1.0 $Zr_EH3 $Zr_TDF
+$C_TWH1 $C_TWH2 $C_TWH3 1.0 $C_EH3 $C_TDF
+$USEANGSCREEN
+$ZrZrZr_CMIN $ZrZrZr_CMAX
+$ZrZrC_CMIN $ZrZrC_CMAX
+$ZrCZr_CMIN $ZrCZr_CMAX
+$ZrCC_CMIN $ZrCC_CMAX
+$CZrZr_CMIN $CZrZr_CMAX
+$CZrC_CMIN $CZrC_CMAX
+$CCZr_CMIN $CCZr_CMAX
+$CCC_CMIN $CCC_CMAX
+$Zr_NDEF
+$C_NDEF
+$EBFILE
+$Zr_EB
+$C_EB
+$VRFILE
+$OUT_ATOMS
+$INSPECTION_ATOM
+$TZERO $TRATE $TAUT $TDELAY_TIME $TFINAL $DMCTEMP
+$PZERO $PRATE $TAUP $PDELAY_TIME $PFINAL
+$KINETIC_ENERGY_REMOVAL_MODE
+$ISHOOT
+$TYPE1IN $TYPE1TIME $TYPE1ENERGY $TYPE1ENERGY2 $TYPE1FRACTION $THETA1 $PHI1 $DMCDIST1 $INTROMODE1
+$TYPE1IN $TYPE1TIME $TYPE1ENERGY $TYPE1ENERGY2 $TYPE1FRACTION $THETA1 $PHI1 $DMCDIST1 $INTROMODE1
+$ISEED
+$RS $UPDFAC
+$STRESSTENSOR $OMEGA_Zr $OMEGA_C
+$KTMZ $EXCDRIFT $EXCROT
+$DMCFRAC
+$MAKEIMAGE
+$IMAGESPECS
+$IPATH $PPFILE $PFFILE
+$ITRANSF $TRANSFFILE
+$ITGRAD $TGRADMODE $TGRADDIR
+$TGRADTEMP0 $TGRADTEMP1 $TGRADVAR2 $TGRADVAR3 $TGRADVAR4 $TGRADVAR5
+$TFIXED
+=
+#-------------------------------------------------------------------------------
+# Turn 'echo' off
+if ( $#argv >= 5 && $5 == D ) unset echo
+#
+# Give the ("scratch") output-files a simulation-time extension
+#
+@ ST = `echo $STARTTIME4 10000 / p | dc`
+@ ET = `echo $STARTTIME4 $SIMTIME4 + 10000 / p | dc`
+if (-e $RTFILE) cp $RTFILE rt$RUNNR.$ST-$ET
+if (-e $INSFILE) cp $INSFILE ins$RUNNR.$ST-$ET
+if (-e $REMFILE) cp $REMFILE rem$RUNNR.$ST-$ET
+if (-e $VRFILE) cp $VRFILE out$RUNNR.$ST-$ET
+if (-e $PFFILE) cp $PFFILE pf$RUNNR.$ST-$ET
+

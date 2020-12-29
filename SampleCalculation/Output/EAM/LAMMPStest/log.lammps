@@ -1,0 +1,55 @@
+LAMMPS (25 Jul 2012)
+# Test of MEAM potential for ZrC system
+
+units		metal
+boundary	p p p
+
+atom_style      atomic
+
+read_data       positions.eam
+  orthogonal box = (0 0 0) to (9.7 9.7 9.7)
+  1 by 1 by 1 MPI processor grid
+  64 atoms
+
+pair_style	eam/alloy
+pair_coeff	* * ZrC.eam.alloy Zr C
+
+thermo		10
+timestep	0.001
+
+dump		1 all atom 10 dump.meam
+
+run             100
+WARNING: No fixes defined, atoms won't move (verlet.cpp:54)
+Memory usage per processor = 1.71339 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0   -453.58073            0   -453.58073   -438651.05 
+      10            0   -453.58073            0   -453.58073   -438651.05 
+      20            0   -453.58073            0   -453.58073   -438651.05 
+      30            0   -453.58073            0   -453.58073   -438651.05 
+      40            0   -453.58073            0   -453.58073   -438651.05 
+      50            0   -453.58073            0   -453.58073   -438651.05 
+      60            0   -453.58073            0   -453.58073   -438651.05 
+      70            0   -453.58073            0   -453.58073   -438651.05 
+      80            0   -453.58073            0   -453.58073   -438651.05 
+      90            0   -453.58073            0   -453.58073   -438651.05 
+     100            0   -453.58073            0   -453.58073   -438651.05 
+Loop time of 0.0125961 on 1 procs for 100 steps with 64 atoms
+
+Pair  time (%) = 0.0105901 (84.074)
+Neigh time (%) = 0 (0)
+Comm  time (%) = 0.000673294 (5.34525)
+Outpt time (%) = 0.00114107 (9.0589)
+Other time (%) = 0.000191689 (1.5218)
+
+Nlocal:    64 ave 64 max 64 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    665 ave 665 max 665 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    2537 ave 2537 max 2537 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 2537
+Ave neighs/atom = 39.6406
+Neighbor list builds = 0
+Dangerous builds = 0

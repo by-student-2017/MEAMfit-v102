@@ -1,0 +1,9 @@
+  1 # Files | Configs to fit | Quantity to fit | Weights
+vasprun1.xml       1-5   Force       1
+
+vasprun1.xml       1-348   Free-Energy       1
+vasprun2.xml       1-362   Free-Energy       1
+vasprun3.xml       1-344   Free-Energy       1
+vasprun4.xml       1-357   Free-Energy       1
+vasprun5.xml       1-380   Free-Energy       1
+vasprun6.xml       1-351   Free-Energy       1

@@ -1,0 +1,30 @@
+These are the orders I want:
+vasprun_lambda1.0_417394.xml   not-needed    1-348   E       1
+vasprun_lambda1.0_606471.xml   not-needed    1-322   E       1
+
+vasprun_lambda1.0_606471.xml   not-needed    1-362   E       1    <--- remainder
+vasprun_lambda1.0_909219.xml   not-needed    1-320   E       1
+vasprun.xml                    not-needed    1-666   E       1    <--- a concatenation? consider removing
+vasprun_lambda1.0_028299.xml   not-needed    1-357   E       1
+vasprun_lambda1.0_143746.xml   not-needed    1-380   E       1
+vasprun_lambda1.0_244092.xml   not-needed    1-351   E       1
+
+
+But this is the order fitdbse is constructed in:
+  6 # Struc | Energies or forces to fit to | Configs to fit | Quantity to fit | Weights
+vasprun_lambda1.0_028299.xml   not-needed    1-357   E       1
+vasprun_lambda1.0_143746.xml   not-needed    1-380   E       1
+vasprun_lambda1.0_244092.xml   not-needed    1-351   E       1
+vasprun_lambda1.0_417394.xml   not-needed    1-348   E       1
+vasprun_lambda1.0_606471.xml   not-needed    1-362   E       1
+vasprun_lambda1.0_909219.xml   not-needed    1-344   E       1
+
+so rename:
+
+vasprun_lambda1.0_417394.xml -> vasprun1.xml
+vasprun_lambda1.0_606471.xml -> vasprun2.xml
+vasprun_lambda1.0_909219.xml -> vasprun3.xml
+vasprun_lambda1.0_028299.xml -> vasprun4.xml
+vasprun_lambda1.0_143746.xml -> vasprun5.xml
+vasprun_lambda1.0_244092.xml -> vasprun6.xml
+

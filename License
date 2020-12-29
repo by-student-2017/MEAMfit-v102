@@ -1,0 +1,12 @@
+MEAMfit2
+  Andrew Ian Duff and Marcel H. F. Sluiter, Copyright 2018 Science and Technology Facilities Council (UK)
+
+Licensing provisions
+  BSD 2-Clause License
+
+Development History
+  The original version of MEAMfit [Comp. Phys. Comm.', 196, 439-445 (2015)] was followed by an improved version, MEAMfit v1.02, published in the same journal under a BSD 2-Clause License [Comp. Phys. Comm. 203, 354-355 (2016)].
+
+References
+[1] https://doi.org/10.1016/j.cpc.2015.05.016  
+[2] https://doi.org/10.1016/j.cpc.2016.02.015

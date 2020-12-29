@@ -1,0 +1,61 @@
+ 
+ --------------- MEAMfit (version 1.0) ---------------
+ By Andrew I. Duff and Marcel H. F. Sluiter, 2006-2015
+ -----------------------------------------------------
+ 
+ Initializing Fitting database
+ -----------------------------
+ File | Configs to fit | Quantity to fit | Weights
+ vasprun4.xml 2 Free energy    1.00000000000000     
+ (fitting to     1 atomic configurations across all files)
+ 
+ General initialization
+ ----------------------
+ USEREF=F (from settings file)
+ No SEED in settings file, using time to seed random numbers.
+ No MUT_PROB in settings file, using default (0.3).
+ No NOPTFUNCSTORE in settings file, using default (10).
+ OPTFUNCCG=  10.00000 (from settings file)
+ No OPTFUNC_ERR in settings file, using default for energy fit (OPTFUNC_ERR=10^-
+ 14).
+ No OPTFUNCCG_GA in settings file, using default (OPTFUNCCG=
+ 10*OPTFUNCCG 100.0000000000).
+ No OPTDIFF in settings file, using default (=10^-10)
+ No OPTACC in settings file, using default (=0.0005)
+ No STOPTIME in settings file, using default (=168 hours=1 week)
+ No MAXFUNCEVALS in settings file, using default (=2000)
+ POTFILEIN=potparas_EAM (from settings)
+ No FIXPOTIN in settings file: allow input potential to optimize
+ NOOPT=TRUE (from settings file)
+ CUTOFF_MAX=   4.40000 (from settings file)
+ No CUTOFF_MIN in settings file, using default (CUTOFF_MIN=
+   1.50000000000000      )
+ TYPE=EAM (from settings file)
+ 
+ Potential initialization
+ ------------------------
+ Reading in potential parameters from potparas_EAM
+ Completed structure initialization
+ Preparing to read data from vasprun.xml files
+ Completed data read-in from vasprun.xml files
+ avgEn=  -635.115866340000      , avgFrc=  0.000000000000000E+000
+ varEn=  0.000000000000000E+000 , varFrc=  0.000000000000000E+000
+ 
+ -----------------------------------------
+ Optimization function=                Infinity
+ -----------------------------------------
+ 
+ rms error on energies=   181.535137831684     
+ rms error on forces=  0.000000000000000E+000
+ 
+ Energies:
+ 
+ Structure          fitdata       truedata
+ --------------------------------------------
+vasprun4.xml_2             -453.580728508316269654    -635.115866340000025048
+ 
+ ----------------------
+ Optimization completed
+ Total time taken  0s.
+ ----------------------
+ 

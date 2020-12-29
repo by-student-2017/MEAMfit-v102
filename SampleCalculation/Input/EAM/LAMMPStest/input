@@ -1,0 +1,15 @@
+#!/bin/sh 
+#PBS -l walltime=0:05:00 
+#PBS -l select=1:ncpus=8 
+
+module load lammps
+module load mpi
+module load intel-suite
+
+cd $TMPDIR/
+
+pbsdsh2 cp $PBS_O_WORKDIR/{FeC.eam.alloy,in_FeC.eam,positions.eam} $TMPDIR/
+
+mpiexec lammps
+
+cp $TMPDIR/* $PBS_O_WORKDIR

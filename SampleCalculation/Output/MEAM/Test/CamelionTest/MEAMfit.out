@@ -1,0 +1,88 @@
+ 
+ --------------- MEAMfit (version 1.0) ---------------
+ By Andrew I. Duff and Marcel H. F. Sluiter, 2006-2015
+ -----------------------------------------------------
+ 
+ Initializing Fitting database
+ -----------------------------
+ File | Configs to fit | Quantity to fit | Weights
+ vasprun4.xml 2 Free energy    1.00000000000000     
+ (fitting to     1 atomic configurations across all files)
+ 
+ General initialization
+ ----------------------
+ USEREF=F (from settings file)
+ No SEED in settings file, using time to seed random numbers.
+ No MUT_PROB in settings file, using default (0.3).
+ No NOPTFUNCSTORE in settings file, using default (10).
+ No OPTFUNCCG in settings file, using default (OPTFUNCCG=10).
+ No OPTFUNC_ERR in settings file, using default for energy fit (OPTFUNC_ERR=10^-
+ 14).
+ No OPTFUNCCG_GA in settings file, using default (OPTFUNCCG=
+ 10*OPTFUNCCG 100.0000000000).
+ No OPTDIFF in settings file, using default (=10^-10)
+ No OPTACC in settings file, using default (=0.0005)
+ No STOPTIME in settings file, using default (=168 hours=1 week)
+ No MAXFUNCEVALS in settings file, using default (=2000)
+ POTFILEIN=potparas_MEAM (from settings)
+ No FIXPOTIN in settings file: allow input potential to optimize
+ NOOPT=TRUE (from settings file)
+ CUTOFF_MAX=   4.40000 (from settings file)
+ No CUTOFF_MIN in settings file, using default (CUTOFF_MIN=
+   1.50000000000000      )
+ TYPE=MEAM (from settings file)
+ 
+ Potential initialization
+ ------------------------
+ Reading in potential parameters from potparas_MEAM
+ Completed structure initialization
+ Preparing to read data from vasprun.xml files
+ Completed data read-in from vasprun.xml files
+ avgEn=  -635.115866340000      , avgFrc=  0.000000000000000E+000
+ varEn=  0.000000000000000E+000 , varFrc=  0.000000000000000E+000
+ 
+ -----------------------------------------
+ Optimization function=                Infinity
+ -----------------------------------------
+ 
+ rms error on energies=   336.324536669119     
+ rms error on forces=  0.000000000000000E+000
+ 
+ Energies:
+ 
+ Structure          fitdata       truedata
+ --------------------------------------------
+vasprun4.xml_2             -298.791329670880713820    -635.115866340000025048
+ 
+ ----------------------
+ Optimization completed
+ Total time taken  0s.
+ ----------------------
+ 
+ Camelion output:
+ ----------------
+ Substitute the following lines into the goion script (note, reduced units):
+ 
+ set ZrZr_PV=(10000  1.63934426229508  0.268744961031981E-03 0.0 0.0 0.0)
+ set ZrC_PV=(10000  1.63934426229508  0.268744961031981E-03 0.0 0.0 0.0)
+ set CC_PV=(10000  1.63934426229508  0.268744961031981E-03 0.0 0.0 0.0)
+ set Zr_EDV=(T 10000  1.63934426229508  0.268744961031981E-03 0.0)
+ set C_EDV=(T 10000  1.63934426229508  0.268744961031981E-03 0.0)
+ set Zr_EB=(14000   9671.1798839458  0.69084790941823 -0.69084790941823)
+ set C_EB=(14000   9671.1798839458  0.69084790941823 -0.69084790941823)
+ set Zr_TWH1=-0.10702123977816
+ set Zr_TWH2=-2.11505426557552
+ set Zr_TWH3=5.454244979684400
+ set C_TWH1=1.2073213092895301
+ set C_TWH2=0.1531189470916990
+ set C_TWH3=-3.105480454126400
+ 
+ !!! Also change the POTENTIALDIRECTORY= line to current directory !!!
+ 
+ Please also add appropriate values for:
+ set Zr_MASS_FORCECONSTANT=(#num #num)
+ set C _MASS_FORCECONSTANT=(#num #num)
+ set OMEGA_Zr=#num
+ set OMEGA_C=#num
+ (please see Camelion documentation for further details)
+ 

@@ -1,0 +1,4 @@
+ 
+ # ids of atoms (i,j) for above smallest sepns
+ (for species, e.g. (1,1); (1,2); (2,2))
+   1:    15,  29   22,  62   51,  63

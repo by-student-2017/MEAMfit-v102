@@ -1,0 +1,86 @@
+ 
+ --------------- MEAMfit (version 1.0) ---------------
+ By Andrew I. Duff and Marcel H. F. Sluiter, 2006-2015
+ -----------------------------------------------------
+ 
+ Initializing Fitting database
+ -----------------------------
+ File | Configs to fit | Quantity to fit | Weights
+ vasprun1.xml 1-348 Free energy    1.00000000000000     
+ vasprun2.xml 1-362 Free energy    1.00000000000000     
+ vasprun3.xml 1-344 Free energy    1.00000000000000     
+ vasprun4.xml 1-357 Free energy    1.00000000000000     
+ vasprun5.xml 1-380 Free energy    1.00000000000000     
+ vasprun6.xml 1-351 Free energy    1.00000000000000     
+ (fitting to  2142 atomic configurations across all files)
+ 
+ General initialization
+ ----------------------
+ USEREF=F (from settings file)
+ No SEED in settings file, using time to seed random numbers.
+ No MUT_PROB in settings file, using default (0.3).
+ No NOPTFUNCSTORE in settings file, using default (10).
+ OPTFUNCCG= 100.00000 (from settings file)
+ No OPTFUNC_ERR in settings file, using default for energy fit (OPTFUNC_ERR=10^-
+ 14).
+ No OPTFUNCCG_GA in settings file, using default (OPTFUNCCG=
+ 10*OPTFUNCCG1000.0000000000).
+ No OPTDIFF in settings file, using default (=10^-10)
+ No OPTACC in settings file, using default (=0.0005)
+ STOPTIME=    0 (from settings file)
+ No MAXFUNCEVALS in settings file, using default (=2000)
+ POTFILEIN=potparas_EAM (from settings)
+ FIXPOTIN=T (from settings file)
+ CUTOFF_MAX=   4.40000 (from settings file)
+ No CUTOFF_MIN in settings file, using default (CUTOFF_MIN=
+   1.50000000000000      )
+ TYPE=EAM (from settings file)
+ NTERMS_DENS(1;1)=NTERMS (= 2)
+ NTERMS_DENS(1;2)=NTERMS (= 2)
+ NTERMS_EMB=3 (from settings file)
+ setting NTERMS_PP(1;1)=NTERMS (= 2)
+ setting NTERMS_PP(1;2)=NTERMS (= 2)
+ setting NTERMS_PP(2;2)=NTERMS (= 2)
+ OPT_ENCONST=T (from settings file)
+ 
+ Potential initialization
+ ------------------------
+ Reading in potential parameters from potparas_EAM
+ Completed structure initialization
+ Preparing to read data from vasprun.xml files
+ Completed data read-in from vasprun.xml files
+ avgEn=  -636.471444739033      , avgFrc=  0.000000000000000E+000
+ varEn=   13.7337569001748      , varFrc=  0.000000000000000E+000
+ Limits on random parameters set to default values
+ 
+ Limits used to initialize potential parameters:
+    enconst(1) can vary from: 10^ 0.000 - 10^ 1.000
+ 
+ Beginning optimization
+ ----------------------
+ 
+ Random potential parameters sampling... (current optfunc:   157.911649909    , lowest optfunc:   157.911649909     >  100.0000000000    )
+ Random potential parameters sampling... (current optfunc:   200.242257943    , lowest optfunc:   157.911649909     >  100.0000000000    )
+ Random potential parameters sampling... (lowest optfunc:   93.1599174894     <  100.0000000000    )                                       
+
+    it   nf       f        reldf    preldf    reldx   stppar   d*step   npreldf
+
+     0    1  0.932D+02
+     1    3  0.754D+02  0.19D+00  0.10D+00  0.2D+00  0.2D+01  0.4D+01  0.11D+00
+     2    5  0.451D+01  0.94D+00  0.77D+00  0.4D+00  0.0D+00  0.2D+02  0.13D+01
+     3    9  0.172D+00  0.96D+00  0.10D+01  0.2D-01  0.4D+03  0.1D+01  0.22D+03
+     4   12  0.150D+00  0.13D+00  0.25D+00  0.3D-03  0.2D+02  0.2D-01  0.21D+01
+     5   13  0.150D+00  0.87D-03  0.10D-02  0.3D-04  0.0D+00  0.2D-02  0.10D-02
+     6   14  0.150D+00  0.16D-04  0.16D-04  0.3D-05  0.0D+00  0.2D-03  0.16D-04
+     7   15  0.150D+00  0.91D-11  0.87D-11  0.2D-08  0.0D+00  0.1D-06  0.87D-11
+
+ x- and relative function convergence
+ Optimization cycle completed.
+ Optimization function=  0.150179422771172     
+ Time:
+ Total time taken 37s.
+ 
+ Number of hours elapsed:            0  greater than STOPTIME=           0
+ 
+  ::: Optimization completed :::
+ 

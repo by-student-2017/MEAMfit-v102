@@ -1,0 +1,131 @@
+Ensuring write permissions
+chmod: cannot access `rt0ZrC': No such file or directory
+chmod: cannot access `rem0ZrC': No such file or directory
+chmod: cannot access `pf0ZrC': No such file or directory
+chmod: cannot access `cn.err': No such file or directory
+Copying this launching script ./goion_ZrC to rungo0.0
+Copying cn0.0 to cn0ZrC
+
+
+ =============================
+           CAMELION
+  Classical Molecular Dynamics
+ =============================
+(MODIFIED) EMBEDDED ATOM METHOD
+           [EXTENDED]
+     with ANGULAR SCREENING
+   VELOCITY VERLET ALGORITHM
+    CELL LINKED LISTS METHOD
+   with VERLET NEIGHBOR TABLE
+      and  TRIPLET TABLES
+ =============================
+         Special modes:
+       DYNAMIC MONTE CARLO
+HYBRID MD + DYNAMIC MONTE CARLO
+      ENERGY MINIMIZATION
+  ON-THE-FLY IMAGE GENERATION
+ =============================
+     Special applications:
+    ION ASSISTED DEPOSITION
+      SURFACE BOMBARDMENT
+           SPUTTERING
+          DEFORMATION
+     TEMPERATURE GRADIENT
+ =============================
+           (c) 2011
+     VIRTUAL MATERIALS LAB
+ DEPT. MATERIALS SCIENCE & ENG
+   DELFT UNIV. OF TECHNOLOGY
+ =============================
+
+ BUILD INFO:
+ Date:
+   Sat Feb 14 10:26:26 GMT 2015
+ Machine + OS version:
+   Linux tycpc34 3.11.0-26-generic x86_64
+ Fortran Compiler:
+   /common/ubuntu/share/intel/Composer/composer_xe_2011.10.319/bin/intel64/ifort
+ Compiler flags:
+   -no-prec-div -o
+  /workspace/aiduff/Camelion//Scripts/camelion11.53-intel-ifort11
+  -I /workspace/aiduff/Camelion//Sources -132 -save
+   -assume nounderscore -mcmodel=large -i-dynamic
+ Linker flags:
+   -lm
+ C Compiler:
+
+ Compiler flags:
+
+ Compiled by:
+   aiduff
+ This program version:    11.53000
+ This incfile version:    11.53000
+
+ -------------------------
+ Maxima defined in incfile
+ -------------------------
+ Atomic types (MAXTYP) =           2
+ Atoms (MAXATM) =      125000
+ Atom ID number (MAXID) =      125000
+ Neighbors of an atom (MAXNBS) =          85
+ ... average number (AVENBS) =          80
+ Neighbor pairs on list (MAXNL) =     5000000
+ Triplets containing the same pair (MAXTRS) =          50
+ Free atoms (MAXFREE) =       10000
+ Datapoints for a single pair potential (MAXPOT) =       10002
+ Datapoints for a single electron density function (MAXRHO) =       10002
+ Datapoints for a single embedding function (MAXEB) =       40002
+ -------------------------
+
+ Number of types is :
+           2
+ Number of atoms of type    1 is      256
+ Number of atoms of type    2 is      256
+ END reading input
+ Total number of atoms =    512
+ Density =   1.355852
+ Molar concentration [1] =   0.500000
+ Molar concentration [2] =   0.500000
+ Temperature =    0.000000
+ In x, y, and z directions:
+ ...Center of gravity at   3.501073  3.713810  3.713810
+ ...Drift speed =   0.000000  0.000000  0.000000
+ ...Average net momentum (pp) =   0.000000  0.000000  0.000000
+ ...Temperature =    0.000000  0.000000  0.000000
+ Pot. energy (pp) from tails type 1   0.000000000000000
+ Pot. energy (pp) from tails type 2   0.000000000000000
+ Pressure from tails     0.000000000000000
+ No (MEAM + Angular screening), therefore no Rmax increase (v11.4, v12.0):
+ TI,TJ =           1           1
+ Rmax for pair list =   1.739344     -->   1.739344
+ TI,TJ =           1           2
+ Rmax for pair list =   1.739344     -->   1.739344
+ TI,TJ =           2           1
+ Rmax for pair list =   1.739344     -->   1.739344
+ TI,TJ =           2           2
+ Rmax for pair list =   1.739344     -->   1.739344
+#cells/Xdirection =      8
+#cells/Ydirection =      8
+#cells/Zdirection =      8
+       0 Zero-index cells counted
+
+
+ ** START OF DYNAMICS **
+
+1=STEP 2=VSCALING 3=ENERGY/N 4=POTENERGY/N 5=PRES 6=TEMP 7=TOTTIME 8=RMS 9=VACF1 10=VACF2 11=DENS 12=N 13=NB 14=NOB 15=NBOT 16=NFREE 17=TEMPALL 18=TEMPOB 19=TEMPBOT 20=NPPP 21=NELIP 22=FRNNL 23=NTRIP 24=|Lx| 25=|Ly| 26=|Lz| nl 1=TMOM1 2=TMOM2 3=TMOM3 4=TMOM4 5=FASTESTTEMP
+
+          0  000000000   -53.539150238037   -53.539150238037  -1641.8156   0.000000        0.000000   0.0000    0.00000    0.00000  1.35585     512     512     512       0       0   0.000000   0.000000  -1.000000    6152    6152       0        0   7.228018   7.228018   7.228018
+  0.0000000E+00  -111.1110      -111.1110      -111.1110     NaN
+
+ **** END OF DYNAMICS ****
+
+
+ NUMBER OF NEGATIVE GAMMA VALUES =          320
+ LOWEST GAMMA VALUE =  -2.629903
+
+ NR NL-REBUILDS    =            1
+ STEPS/NL-REBUILDS =   0.0000000E+00
+ AVG. FRACTION INTERACTION PAIRS in NL =  0.89
+ File "inspection" has info on final state
+0.138u 0.007s 0:00.14 92.8%     0+0k 0+120io 0pf+0w
+
